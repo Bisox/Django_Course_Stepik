@@ -16,26 +16,12 @@ Including another URLconf
 """
 
 from django.contrib import admin
-from django.urls import path
-from horoscope import views as views_horoscope
-from week_days import views as views_week_days
+from django.urls import path, include
+
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('horoscope/aries/', views_horoscope.aries),
-    path('horoscope/taurus/', views_horoscope.taurus),
-    path('horoscope/gemini/', views_horoscope.gemini),
-    path('horoscope/cancer/', views_horoscope.cancer),
-    path('horoscope/leo/', views_horoscope.leo),
-    path('horoscope/virgo/', views_horoscope.virgo),
-    path('horoscope/libra/', views_horoscope.libra),
-    path('horoscope/scorpio/', views_horoscope.scorpio),
-    path('horoscope/sagittarius/', views_horoscope.sagittarius),
-    path('horoscope/capricorn/', views_horoscope.capricorn),
-    path('horoscope/aquarius/', views_horoscope.aquarius),
-    path('horoscope/pisces/', views_horoscope.pisces),
-
-    path('week_days/monday', ),
-    path('week_days/tuesday'),
+    path('horoscope/', include('horoscope.urls')),
+    path('week_days/', include('week_days.urls')),
 
 ]
