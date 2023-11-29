@@ -1,15 +1,17 @@
 from django.shortcuts import render
-from django.http import HttpResponse
+from django.http import HttpResponse, HttpResponseNotFound
 
 
 # Create your views here.
 
 
-def monday(request):
-    return HttpResponse('<br> Встать <br>'
-                        '<br> Пожрать <br>'
-                        '<br> Поспать <br>')
 
-
-def tuesday(request):
-    return HttpResponse('Отдыхаем')
+def weekday_choice(request, weekday):
+    if weekday == 'monday':
+        return HttpResponse('<br> Встать <br>'
+                            '<br> Пожрать <br>'
+                            '<br> Поспать <br>')
+    elif weekday == 'tuesday':
+        return HttpResponse('Отдыхаем')
+    else:
+        return HttpResponseNotFound('Not Found Day')
