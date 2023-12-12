@@ -1,24 +1,30 @@
 from django.shortcuts import render
-from django.http import HttpResponse, HttpResponseNotFound
-
+from django.http import HttpResponse, HttpResponseNotFound, HttpResponseRedirect
 
 # Create your views here.
+weekdays_dict = {
+    "Monday": "Встать, пожрать, поспать",
+    "Tuesday": "Что-нибудь",
+    "Wednesday": "Кого-нибудь",
+    "Thursday": "Чем-нибудь",
+    "Friday": "Для чего-нибудь",
+    "Saturday": "Кем-нибудь",
+    "Sunday": "Заново"
+}
 
 
 def weekday_choice(request, weekday: str):
-    if weekday == 'monday':
-        return HttpResponse('<br> Встать <br>'
-                            '<br> Пожрать <br>'
-                            '<br> Поспать <br>')
-    elif weekday == 'tuesday':
-        return HttpResponse('Отдыхаем')
-    else:
-        return HttpResponseNotFound('Not Found Day')
+    description = weekdays_dict.get(weekday, None)
+    if description:
+        return HttpResponse(description)
+
+    return HttpResponseNotFound('Not Found Day')
 
 
 def weekday_number(request, weekday: int):
-    if 1 <= weekday <= 7:
-        return HttpResponse(f'Сегодня {weekday} день недели')
-    else:
-        return HttpResponseNotFound(f'Неверный номер дня - {weekday}')
+    weekday_list = list(weekdays_dict)
 
+    if len(weekday_list) < weekday:
+        return HttpResponseNotFound(f'Неверный номер дня - {weekday}')
+    name_weekday = weekday_list[weekday-1]
+    return HttpResponseRedirect(f'/week_days/todo_week/{name_weekday}')

@@ -1,4 +1,4 @@
-from django.http import HttpResponse
+from django.http import HttpResponse, HttpResponseRedirect
 from math import pi
 
 
@@ -14,3 +14,15 @@ def get_square_area(request, width):
 
 def get_circle_area(request, radius):
     return HttpResponse(f'Площадь круга радиуса {radius} равна {int(pi * radius ** 2)}')
+
+
+def rectangle(request, width, height):
+    return HttpResponseRedirect(f'/calculate_geometry/rectangle/{width}/{height}')
+
+
+def square(request, width):
+    return HttpResponseRedirect(f'/calculate_geometry/square/{width}')
+
+
+def circle(request, radius):
+    return HttpResponseRedirect(f'/calculate_geometry/circle/{radius}')

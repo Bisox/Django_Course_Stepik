@@ -2,6 +2,7 @@ from django.urls import path
 from . import views
 
 urlpatterns = [
-    path('<sign_zodiak>/', views.choice_zodiak)
+    path('<int:sign_zodiac>/', views.number_zodiac),
+    path('<str:sign_zodiac>/', views.choice_zodiac, name='horoscope-name'),
 
 ]
