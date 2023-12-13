@@ -1,6 +1,7 @@
 from django.shortcuts import render
 from django.http import HttpResponse, HttpResponseNotFound, HttpResponseRedirect
 from django.urls import reverse
+
 zodiac_dict = {
     'aries': 'Овен - первый знак зодиака, планета Марс (с 21 марта по 20 апреля).',
     'taurus': 'Телец - второй знак зодиака, планета Венера (с 21 апреля по 21 мая).',
@@ -17,10 +18,24 @@ zodiac_dict = {
 }
 
 
+def index(request):
+    zodiac_list = list(zodiac_dict)
+    li_elements = ''
+    for sign in zodiac_list:
+        redirect_path = reverse('horoscope-name', args=[sign])
+        li_elements += f'<li> <a href={redirect_path}>{sign.title()} </a> </li>'
+    response = f'''
+    <ul>
+        {li_elements}
+    </ul>    
+    '''
+    return HttpResponse(response)
+
+
 def choice_zodiac(request, sign_zodiac):
     description = zodiac_dict.get(sign_zodiac, None)
     if description:
-        return HttpResponse(description)
+        return HttpResponse(f'<h2>{description}</h2>')
     else:
         return HttpResponseNotFound(f'NotFound - {sign_zodiac}')
 
@@ -30,6 +45,6 @@ def number_zodiac(request, sign_zodiac):
 
     if sign_zodiac > len(zodiac_list):
         return HttpResponseNotFound(f'NotFound - {sign_zodiac}')
-    name_zodiac = zodiac_list[sign_zodiac-1]
-    redirect = reverse('horoscope-name', args=name_zodiac)
-    return HttpResponseRedirect(redirect)
+    name_zodiac = zodiac_list[sign_zodiac - 1]
+    redirect_url = reverse('horoscope-name', args=(name_zodiac,))
+    return HttpResponseRedirect(redirect_url)
