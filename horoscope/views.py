@@ -17,6 +17,42 @@ zodiac_dict = {
     'pisces': 'Рыбы - двенадцатый знак зодиака, планеты Юпитер (с 20 февраля по 20 марта).',
 }
 
+zodiac_element = {
+    'fire': ['aries', 'leo', 'sagittarius'],
+    'earth': ['taurus', 'virgo', 'capricorn'],
+    'air': ['gemini', 'libra', 'aquarius'],
+    'water': ['cancer', 'scorpio', 'pisces']
+}
+
+
+def type_sign_zodiac(request):
+    type_list = list(zodiac_element)
+    element = ''
+    for type in type_list:
+        redirect_path = reverse('type_sign_name', args=[type])
+        element += f'<li><h3><a href="{redirect_path}">{type.title()}</a></h3></li>'
+    response = f"""
+    <ul>
+        {element}
+    </ul>                
+    """
+    return HttpResponse(response)
+
+
+def choice_type_sign(request, sign_type):
+    description = zodiac_element.get(sign_type, None)
+    if description:
+        sign_element = ''
+        for element in description:
+            redirect_url = reverse('horoscope-name', args=[element])
+            sign_element += f'<li><h3><a href="{redirect_url}">{element.title()}</a></h3></li>'
+        response = f"""
+        <ul>
+        {sign_element}
+        </ul>                
+        """
+        return HttpResponse(response)
+
 
 def index(request):
     zodiac_list = list(zodiac_dict)
@@ -36,8 +72,8 @@ def choice_zodiac(request, sign_zodiac):
     description = zodiac_dict.get(sign_zodiac, None)
     if description:
         return HttpResponse(f'<h2>{description}</h2>')
-    else:
-        return HttpResponseNotFound(f'NotFound - {sign_zodiac}')
+
+    return HttpResponseNotFound(f'NotFound - {sign_zodiac}')
 
 
 def number_zodiac(request, sign_zodiac):
