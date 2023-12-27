@@ -25,6 +25,11 @@ zodiac_element = {
 }
 
 
+def get_yyyy_converter(request, sign_zodiac):
+    return HttpResponse(f'Принято 4-х значное число {sign_zodiac}')
+
+
+
 def type_sign_zodiac(request):
     type_list = list(zodiac_element)
     element = ''
