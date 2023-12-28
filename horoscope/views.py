@@ -33,6 +33,10 @@ def get_float_converter(request, sign_zodiac):
     return HttpResponse(f'Принято вещественное число {sign_zodiac}')
 
 
+def get_date_converter(request, sign_zodiac):
+    return HttpResponse(f'Вы передали дату: {sign_zodiac}')
+
+
 def type_sign_zodiac(request):
     type_list = list(zodiac_element)
     element = ''
