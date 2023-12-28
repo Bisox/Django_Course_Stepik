@@ -26,22 +26,22 @@ zodiac_element = {
 
 
 # views.converters-------------------------------------------------------
-def get_yyyy_converter(request, sign_zodiac):
-    return HttpResponse(f'Принято 4-х значное число {sign_zodiac}')
-
-
-def get_float_converter(request, sign_zodiac):
-    return HttpResponse(f'Принято вещественное число {sign_zodiac}')
-
-
-def get_date_converter(request, sign_zodiac):
-    return HttpResponse(f'Вы передали дату: {sign_zodiac}')
-
-def get_split_converter(request, sign_zodiac):
-    return HttpResponse(f'Разделили по запятым: {sign_zodiac}')
-
-def get_upper_converter(request, sign_zodiac):
-    return HttpResponse(f'Переводим в верхний регистр: {sign_zodiac}')
+# def get_yyyy_converter(request, sign_zodiac):
+#     return HttpResponse(f'Принято 4-х значное число {sign_zodiac}')
+#
+#
+# def get_float_converter(request, sign_zodiac):
+#     return HttpResponse(f'Принято вещественное число {sign_zodiac}')
+#
+#
+# def get_date_converter(request, sign_zodiac):
+#     return HttpResponse(f'Вы передали дату: {sign_zodiac}')
+#
+# def get_split_converter(request, sign_zodiac):
+#     return HttpResponse(f'Разделили по запятым: {sign_zodiac}')
+#
+# def get_upper_converter(request, sign_zodiac):
+#     return HttpResponse(f'Переводим в верхний регистр: {sign_zodiac}')
 
 # ------------------------------------------------------------------------
 
