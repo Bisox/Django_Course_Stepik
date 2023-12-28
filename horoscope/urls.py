@@ -4,6 +4,7 @@ from . import views, converter
 register_converter(converter.FourDigitYearConverter, 'yyyy')
 register_converter(converter.MyFloatConverter, 'float')
 register_converter(converter.MyDateConverter, 'date')
+register_converter(converter.SplitConvertor, 'split')
 
 urlpatterns = [
     path('', views.index),
@@ -13,6 +14,7 @@ urlpatterns = [
     path('<yyyy:sign_zodiac>/', views.get_yyyy_converter),
     path('<float:sign_zodiac>/', views.get_float_converter),
     path('<date:sign_zodiac>/', views.get_date_converter),
+    path('<split:sign_zodiac>/', views.get_split_converter),
     # -----------------------------------------------------------------
     path('<int:sign_zodiac>/', views.number_zodiac),
     path('<str:sign_zodiac>/', views.choice_zodiac, name='horoscope-name'),
