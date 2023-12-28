@@ -39,6 +39,10 @@ def get_date_converter(request, sign_zodiac):
 
 def get_split_converter(request, sign_zodiac):
     return HttpResponse(f'Разделили по запятым: {sign_zodiac}')
+
+def get_upper_converter(request, sign_zodiac):
+    return HttpResponse(f'Переводим в верхний регистр: {sign_zodiac}')
+
 # ------------------------------------------------------------------------
 
 
