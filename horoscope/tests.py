@@ -26,3 +26,5 @@ class TestHoroscope(TestCase):
             response = self.client.get(redirect_url)
             self.assertEqual(response.status_code, 302)
             self.assertEqual(response.url, redirect_url_value)
+
+
