@@ -12,15 +12,17 @@ class TestHoroscope(TestCase):
         self.assertEqual(response.status_code, 200)
 
     def test_signs(self):
-        sign_zodiac_list = list(zodiac_dict)
-        for sign in sign_zodiac_list:
-            redirect_url = reverse('horoscope-name', args=[sign])
+
+        for key, value in zodiac_dict.items():
+            redirect_url = reverse('horoscope-name', args=[key])
             response = self.client.get(redirect_url)
             self.assertEqual(response.status_code, 200)
-            self.assertIn(zodiac_dict.get(sign), response.content.decode())
+            self.assertIn(value, response.content.decode())
 
     def test_sign_redirect(self):
-        for i in range(1, len(zodiac_dict)+1):
-            response = self.client.get(f'/horoscope/{i}/')
+        for i, value in enumerate(zodiac_dict, start=1):
+            redirect_url = reverse('horoscope-name', args=[i])
+            redirect_url_value = reverse('horoscope-name', args=[value])
+            response = self.client.get(redirect_url)
             self.assertEqual(response.status_code, 302)
-            self.assertEqual(response.url, f'/horoscope/{list(zodiac_dict)[i-1]}/')
+            self.assertEqual(response.url, redirect_url_value)
