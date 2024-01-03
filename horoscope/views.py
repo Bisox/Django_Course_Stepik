@@ -25,6 +25,23 @@ zodiac_element = {
 }
 
 
+sing_rus_name = {
+    'aries': 'Овна',
+    'taurus': 'Тельца',
+    'gemini': 'Близнецов',
+    'cancer': 'Рака',
+    'leo': 'Льва',
+    'virgo': 'Девы',
+    'libra': 'Весов',
+    'scorpio': 'Скорпиона',
+    'sagittarius': 'Стрельца',
+    'capricorn': 'Козерога',
+    'aquarius': 'Водолея',
+    'pisces': 'Рыб',
+}
+
+
+
 # views.converters-------------------------------------------------------
 # def get_yyyy_converter(request, sign_zodiac):
 #     return HttpResponse(f'Принято 4-х значное число {sign_zodiac}')
@@ -90,11 +107,19 @@ def index(request):
 
 
 def choice_zodiac(request, sign_zodiac):
-    description = zodiac_dict.get(sign_zodiac, None)
-    if description:
-        return HttpResponse(f'<h2>{description}</h2>')
+    description = zodiac_dict.get(sign_zodiac)
+    rus_name = sing_rus_name.get(sign_zodiac)
+    data = {
+        'description_zodiac': description,
+        'sing': rus_name
+    }
+    return render(request, 'horoscope/info_zodiac.html', context=data)
 
-    return HttpResponseNotFound(f'NotFound - {sign_zodiac}')
+    # description = zodiac_dict.get(sign_zodiac, None)
+    # if description:
+    #     return HttpResponse(f'<h2>{description}</h2>')
+    #
+    # return HttpResponseNotFound(f'NotFound - {sign_zodiac}')
 
 
 def number_zodiac(request, sign_zodiac):
